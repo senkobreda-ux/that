@@ -58,9 +58,15 @@ export default async function handler(req) {
 
     // Don't allow arbitrary external URLs.
     const url = DISCORD_API + path;
-
+    const token = process.env.DISCORD_BOT_TOKEN;
+    
+    console.log("token length:", token ? token.length : 0);
+    console.log("token first 10 codepoints:",
+      token ? [...token.slice(0, 10)].map(c => c.charCodeAt(0)) : []
+    );
+    
     const headers = {
-      "Authorization": "Bot " + process.env.DISCORD_BOT_TOKEN,
+      "Authorization": "Bot " + token,
       "User-Agent": "DiscordBot (GAS Client, 1.0)"
     };
 
